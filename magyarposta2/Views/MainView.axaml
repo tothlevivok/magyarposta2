@@ -1,0 +1,72 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:magyarposta2.ViewModels"
+			 xmlns:asd="clr-namespace:magyarposta2"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="magyarposta2.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Grid>
+	  <Grid.RowDefinitions>
+		  <RowDefinition/>
+		  <RowDefinition/>
+		  <RowDefinition/>
+		  <RowDefinition/>
+		  <RowDefinition/>
+		  <RowDefinition/>
+		  <RowDefinition/>
+		  <RowDefinition/>
+		  <RowDefinition/>
+		  <RowDefinition/>
+		  <RowDefinition/>
+		  <RowDefinition/>
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+		  <ColumnDefinition/>
+		  <ColumnDefinition/>
+		  <ColumnDefinition/>
+      </Grid.ColumnDefinitions>
+
+	  <Label Grid.Column="0" Grid.Row="0" Content="Magyar Posta"/>
+	  <Label Grid.Column="0" Grid.Row="1" Content="Csomag ID:"/>
+	  <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding IdInput}"/>
+
+	  <Label Grid.Column="0" Grid.Row="2" Content="Csomag Neve:"/>
+	  <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NameInput}"/>
+
+	  <Label Grid.Column="0" Grid.Row="3" Content="Feladás ideje: calendar"/>
+	  <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding SentDateInput}"/>
+
+	  <Label Grid.Column="0" Grid.Row="4" Content="Honnan:"/>
+	  <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding SentFromInput}"/>
+
+	  <Label Grid.Column="0" Grid.Row="5" Content="Hova:"/>
+	  <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding DestinationInput}"/>
+
+	  <Label Grid.Column="0" Grid.Row="6" Content="Csomag állapota:"/>
+	  <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding StatusInput}"/>
+
+	  <Label Grid.Column="0" Grid.Row="7" Content="Csomag ára:"/>
+	  <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding PriceInput}"/>
+
+	  <Label Grid.Column="0" Grid.Row="8" Content="Csomag érkezési ideje:"/>
+	  <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding DaysToArriveInput}"/>
+
+	  <Button Grid.Row="9" Grid.ColumnSpan="2" Command="{Binding AddPackageCommand}" Content="Hozzáadás" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	  <Button Grid.Row="10" Grid.ColumnSpan="2" Command="{Binding SaveCommand}" Content="Mentés" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	  <Button Grid.Row="11" Grid.ColumnSpan="2" Command="{Binding LoadCommand}" Content="Betöltés" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+	  <ScrollViewer Grid.Row="0" Grid.Column="2" Grid.RowSpan="4">
+		  <StackPanel>
+			  <ItemsControl ItemsSource="{Binding Packages}">
+				  <ItemsControl.ItemTemplate>
+					  <DataTemplate>
+						  <asd:UserControl1/>
+                      </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+              </ItemsControl>
+          </StackPanel>
+      </ScrollViewer>
+  </Grid>
+</UserControl>

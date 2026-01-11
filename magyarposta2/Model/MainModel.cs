@@ -9,7 +9,7 @@ namespace magyarposta2.Model
 {
     public class MainModel
     {
-        public List<Package> packages { get; set; }
+        private List<Package> packages { get; set; }
         public IDataAccess DataAccess;
         public event EventHandler<PackageEventArgs>? PackageAdded;
 
@@ -22,7 +22,7 @@ namespace magyarposta2.Model
         public void AddPackage(Package package)
         {
             packages.Add(package);
-            PackageAdded.Invoke(this, new PackageEventArgs(package));
+            PackageAdded?.Invoke(this, new PackageEventArgs(package));
         }
 
         public async Task Load(string path)
@@ -31,15 +31,15 @@ namespace magyarposta2.Model
             foreach (Package p in newPackages)
             {
                 packages.Add(p);
-                PackageAdded.Invoke(this, new PackageEventArgs(p));
+                PackageAdded?.Invoke(this, new PackageEventArgs(p));
             }
         }
 
-        public Package package;
+        //public Package package;
 
         public async Task Save(string path)
         {
-            DataAccess.Save(path, package);
+            DataAccess.Save(path, packages);
         }
 
     }

@@ -9,7 +9,7 @@ namespace magyarposta2.Persistance
 {
     public interface IDataAccess
     {
-        Task Save(string path, Package package);
+        Task Save(string path, List<Package> package);
         Task<List<Package>> LoadAll(string path);
     }
 }

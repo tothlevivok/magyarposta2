@@ -33,7 +33,14 @@ public partial class App : Application
             desktop.MainWindow = new MainWindow
             {
                 DataContext = viewModel,
-                Content = view
+                //Content = view
+            };
+            viewModel.ChangeView += (s, e) =>
+            {
+                desktop.MainWindow.Content = new PackagesView
+                {
+                    DataContext = e.package
+                };
             };
             viewModel.SaveEvent += async (s, e) =>
             {

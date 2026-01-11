@@ -17,8 +17,7 @@ namespace magyarposta2.Persistance
             {
                 try
                 {
-                    string number = await reader.ReadLineAsync();
-                    for (int i = 0; i < int.Parse(number); i++)
+                    while (!reader.EndOfStream)
                     {
                         string line = await reader.ReadLineAsync();
                         string[] parts = line.Split(';');
@@ -34,7 +33,6 @@ namespace magyarposta2.Persistance
                         );
                         packages.Add(package);
                     }
-                    return packages;
                 }
                 catch (Exception e)
                 {
@@ -44,14 +42,17 @@ namespace magyarposta2.Persistance
             return packages;
         }
 
-        public async Task Save(string path, Package package)
+        public async Task Save(string path, List<Package> packages)
         {
             using (StreamWriter writer = new StreamWriter(path))
             {
                 try
                 {
-                    string line = package.ToString();
-                    await writer.WriteLineAsync(line);
+                    foreach (Package package in packages)
+                    {
+                        string line = package.ToString();
+                        await writer.WriteLineAsync(line);
+                    }
                 }
                 catch (Exception ex)
                 {

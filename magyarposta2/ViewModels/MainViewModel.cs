@@ -17,11 +17,13 @@ public partial class MainViewModel : ViewModelBase
     public string StatusInput { get; set; }
     public int PriceInput { get; set; }
     public int DaysToArriveInput { get; set; }
-
     public RelayCommand AddPackageCommand { get; set; }
     public RelayCommand LoadCommand { get; set; }
     public RelayCommand SaveCommand { get; set; }
     public ObservableCollection<Package> Packages { get; set; }
+
+    public event EventHandler<PackageEventArgs> ChangeView;
+    public event EventHandler GoBack;
 
     public event EventHandler LoadEvent;
     public event EventHandler SaveEvent;
@@ -33,25 +35,54 @@ public partial class MainViewModel : ViewModelBase
         _model.PackageAdded += OnAddPackage;
         AddPackageCommand = new RelayCommand(AddPackage);
         LoadCommand = new RelayCommand(() => LoadEvent.Invoke(this, EventArgs.Empty));
-        SaveCommand = new RelayCommand(() => { loadPackage(); SaveEvent.Invoke(this, EventArgs.Empty); });
-    }
-
-
-
-    private void loadPackage()
-    {
-        _model.package = new Package(IdInput, NameInput, SentDateInput, SentFromInput, DestinationInput, StatusInput, PriceInput, DaysToArriveInput);
+        SaveCommand = new RelayCommand(() => { SaveEvent.Invoke(this, EventArgs.Empty); });
     }
 
     private void OnAddPackage(object? sender, PackageEventArgs e)
     {
         Package package = new Package(e.package.Id, e.package.Name, e.package.SentDate, e.package.SentFrom, e.package.Destination, e.package.Status, e.package.Price, e.package.DaysToArrive);
+        if (package.Status == "Kiszállítva")
+        {
+            package.DaysToArrive = 0;
+        }
+        if (package.Price <= 0)
+        {
+            return;
+        }
+
+        package.MoreCommand = new RelayCommand(() =>
+        {
+            ChangeView?.Invoke(this, new PackageEventArgs(package));
+        });
+        package.BackCommand = new RelayCommand(() =>
+        {
+            GoBack?.Invoke(this, EventArgs.Empty);
+        });
+
         Packages.Add(package);
     }
 
-    private void AddPackage()
+    private  void AddPackage()
     {
         Package package = new Package(IdInput, NameInput, SentDateInput, SentFromInput, DestinationInput, StatusInput, PriceInput, DaysToArriveInput);
+        if (package.Status == "Kiszállítva")
+        {
+            package.DaysToArrive = 0;
+        }
+        if (package.Price <= 0)
+        {
+            return;
+        }
+
+        package.MoreCommand = new RelayCommand(() =>
+        {
+            ChangeView?.Invoke(this, new PackageEventArgs(package));
+        });
+        package.BackCommand = new RelayCommand(() =>
+        {
+            GoBack?.Invoke(this, EventArgs.Empty);
+        });
+
         _model.AddPackage(package);
     }
 }

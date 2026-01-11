@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="magyarposta2.UserControl1">
-    <Grid Background="gray">
-	    <Grid.ColumnDefinitions>
+    <Grid Background="Gray">
+        <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -13,5 +13,6 @@
 
         <Label Padding="40" Grid.Column="0" VerticalAlignment="Center" Content="ID: "/>
         <Label VerticalAlignment="Center" Grid.Column="1" Content="{Binding Id}"/>
+        <Button Grid.Column="2" Content="Módosítás" Command="{Binding MoreCommand}"/>
     </Grid>
 </UserControl>

@@ -33,7 +33,7 @@ public partial class App : Application
             desktop.MainWindow = new MainWindow
             {
                 DataContext = viewModel,
-                //Content = view
+                Content = view
             };
             viewModel.ChangeView += (s, e) =>
             {

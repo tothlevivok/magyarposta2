@@ -23,8 +23,9 @@
 		  <RowDefinition/>
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
-		  <ColumnDefinition/>
-		  <ColumnDefinition/>
+		  <ColumnDefinition Width="0.75*"/>
+		  <ColumnDefinition Width="0.75*"/>
+		  <ColumnDefinition Width="1.75*"/>
 		  <ColumnDefinition/>
       </Grid.ColumnDefinitions>
 
@@ -35,23 +36,26 @@
 	  <Label Grid.Column="0" Grid.Row="2" Content="Csomag Neve:"/>
 	  <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NameInput}"/>
 
-	  <Label Grid.Column="0" Grid.Row="3" Content="Feladás ideje: calendar"/>
-	  <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding SentDateInput}"/>
+	   <Label Grid.Column="2" Grid.Row="1" Content="Feladás ideje:"/>
+	  <StackPanel Grid.Column="2" Grid.Row="1" Margin="20">
+		<Calendar x:Name="calendar" SelectionMode="MultipleRange" SelectedDate="{Binding SentDate}"/>
+		<TextBlock Margin="20" Text="{Binding Sent}"/>
+	  </StackPanel>
 
-	  <Label Grid.Column="0" Grid.Row="4" Content="Honnan:"/>
-	  <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding SentFromInput}"/>
+	  <Label Grid.Column="0" Grid.Row="3" Content="Honnan:"/>
+	  <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding SentFromInput}"/>
 
-	  <Label Grid.Column="0" Grid.Row="5" Content="Hova:"/>
-	  <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding DestinationInput}"/>
+	  <Label Grid.Column="0" Grid.Row="4" Content="Hova:"/>
+	  <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding DestinationInput}"/>
 
-	  <Label Grid.Column="0" Grid.Row="6" Content="Csomag állapota:"/>
-	  <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding StatusInput}"/>
+	  <Label Grid.Column="0" Grid.Row="5" Content="Csomag állapota:"/>
+	  <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding StatusInput}"/>
 
-	  <Label Grid.Column="0" Grid.Row="7" Content="Csomag ára:"/>
-	  <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding PriceInput}"/>
+	  <Label Grid.Column="0" Grid.Row="6" Content="Csomag ára:"/>
+	  <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding PriceInput}"/>
 
-	  <Label Grid.Column="0" Grid.Row="8" Content="Csomag érkezési ideje:"/>
-	  <TextBox Grid.Column="1" Grid.Row="8" Text="{Binding DaysToArriveInput}"/>
+	  <Label Grid.Column="0" Grid.Row="7" Content="Csomag érkezési ideje:"/>
+	  <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding DaysToArriveInput}"/>
 
 	  <Button Grid.Row="9" Grid.ColumnSpan="2" Command="{Binding AddPackageCommand}" Content="Hozzáadás" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 	  <Button Grid.Row="10" Grid.ColumnSpan="2" Command="{Binding SaveCommand}" Content="Mentés" HorizontalAlignment="Center" VerticalAlignment="Center"/>

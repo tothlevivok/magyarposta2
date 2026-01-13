@@ -11,7 +11,36 @@ public partial class MainViewModel : ViewModelBase
 
     public int IdInput { get; set; }
     public string NameInput { get; set; }
-    public DateOnly SentDateInput { get; set; }
+    private DateTime _sentDate { get; set; }
+    private DateOnly _sent;
+    public DateOnly Sent
+    {
+        get { return _sent;}
+        set
+        {
+            if (_sent != value)
+            {
+                _sent = value;
+                OnPropertyChanged(nameof(Sent));
+                OnPropertyChanged(nameof(SentDate));
+            }
+        }
+    }
+
+    public DateTime SentDate
+    {
+        get { return _sentDate; }
+        set
+        {
+            if (_sentDate != value)
+            {
+                _sentDate = value;
+                Sent = DateOnly.FromDateTime(_sentDate);
+                OnPropertyChanged(nameof(SentDate));
+            }
+        }
+    }
+
     public string SentFromInput { get; set; }
     public string DestinationInput { get; set; }
     public string StatusInput { get; set; }
@@ -64,7 +93,7 @@ public partial class MainViewModel : ViewModelBase
 
     private  void AddPackage()
     {
-        Package package = new Package(IdInput, NameInput, SentDateInput, SentFromInput, DestinationInput, StatusInput, PriceInput, DaysToArriveInput);
+        Package package = new Package(IdInput, NameInput, Sent, SentFromInput, DestinationInput, StatusInput, PriceInput, DaysToArriveInput);
         if (package.Status == "Kiszállítva")
         {
             package.DaysToArrive = 0;

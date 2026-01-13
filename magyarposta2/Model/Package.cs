@@ -19,6 +19,9 @@ namespace magyarposta2.Model
         public int DaysToArrive { get; set; }
         public RelayCommand MoreCommand { get; set; }
         public RelayCommand BackCommand { get; set; }
+        public RelayCommand EnableIdCommand { get; }
+        public bool IsIdEnabled { get; set; } = false;
+        public RelayCommand DeleteCommand { get; set; }
         public Package(int id, string name, DateOnly sentDate, string sentFrom, string destination, string status, int price, int daysToArrive)
         {
             Id = id;
@@ -29,6 +32,7 @@ namespace magyarposta2.Model
             Status = status;
             Price = price;
             DaysToArrive = daysToArrive;
+            EnableIdCommand = new RelayCommand(() => IsIdEnabled = true);
         }
 
         public override string ToString()

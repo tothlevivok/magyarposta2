@@ -49,8 +49,17 @@
 	  <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding DestinationInput}"/>
 
 	  <Label Grid.Column="0" Grid.Row="5" Content="Csomag állapota:"/>
-	  <TextBox Grid.Column="1" Grid.Row="5" Text="{Binding StatusInput}"/>
+	  <StackPanel Margin="20">
+		  <ComboBox SelectedValue="{Binding StatusInput}" MaxDropDownHeight="100">
+			<x:String >Feldolgozás alatt</x:String>
+			<x:String>Kiszállítás alatt</x:String>
+			<x:String>Kiszállítva</x:String>
+			<x:String>Kiszálltva</x:String>
+			<x:String>Törölve</x:String>
+		  </ComboBox>
+	</StackPanel>
 
+	  
 	  <Label Grid.Column="0" Grid.Row="6" Content="Csomag ára:"/>
 	  <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding PriceInput}"/>
 

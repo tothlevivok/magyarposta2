@@ -5,5 +5,54 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="magyarposta2.PackagesView">
     <Grid>
+	<Grid.ColumnDefinitions>
+		<ColumnDefinition/>
+		<ColumnDefinition/>
+		<ColumnDefinition/>
+	</Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+		<RowDefinition/>
+		<RowDefinition/>
+		<RowDefinition/>
+		<RowDefinition/>
+		<RowDefinition/>
+		<RowDefinition/>
+		<RowDefinition/>
+		<RowDefinition/>
+		<RowDefinition/>
+    </Grid.RowDefinitions>
+	<Label Grid.Column="0" VerticalAlignment="Center" Content="ID: "/>
+	<TextBox Grid.Row="0"  Grid.Column="1" Text="{Binding Id}"/>
+
+		<Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Content="Name: "/>
+		<TextBox Grid.Row="1"  Grid.Column="1" Text="{Binding Name}"/>
+
+		<Label Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Content="Sent Date: "/>
+		<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SentDate}"/>
+
+		<Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Content="Sent From: "/>
+		<TextBox Grid.Row="3" Grid.Column="1"  Text="{Binding SentFrom}"/>
+
+		<Label Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Content="Destination: "/>
+		<TextBox Grid.Row="4" Grid.Column="1"  Text="{Binding Destination}"/>
+
+		<Label Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Content="Status: "/>
+		<StackPanel Grid.Row="5" Grid.Column="1" Margin="20">
+		  <ComboBox SelectedValue="{Binding Status}" MaxDropDownHeight="100">
+			<x:String >Feldolgozás alatt</x:String>
+			<x:String>Kiszállítás alatt</x:String>
+			<x:String>Kiszállítva</x:String>
+			<x:String>Kiszálltva</x:String>
+			<x:String>Törölve</x:String>
+		  </ComboBox>
+	</StackPanel>
+
+		<Label Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Content="Price: "/>
+		<TextBox Grid.Row="6" Grid.Column="1"  Text="{Binding Price}"/>
+
+		<Label Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Content="Days To Arrive: "/>
+		<TextBox Grid.Row="7" Grid.Column="1"  Text="{Binding DaysToArrive}"/>
+
+	<Button Grid.Row="8" Content="Vissza"/>
     </Grid>
 </UserControl>

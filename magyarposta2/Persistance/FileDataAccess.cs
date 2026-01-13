@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using magyarposta2.Model;
+using magyarposta2.ViewModels;
 
 namespace magyarposta2.Persistance
 {

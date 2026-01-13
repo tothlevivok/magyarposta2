@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using magyarposta2.Model;
 
@@ -67,9 +68,15 @@ public partial class MainViewModel : ViewModelBase
         SaveCommand = new RelayCommand(() => { SaveEvent.Invoke(this, EventArgs.Empty); });
     }
 
+
     private void OnAddPackage(object? sender, PackageEventArgs e)
     {
-        Package package = new Package(e.package.Id, e.package.Name, e.package.SentDate, e.package.SentFrom, e.package.Destination, e.package.Status, e.package.Price, e.package.DaysToArrive);
+        Package package = new Package(
+            e.package.Id, e.package.Name, e.package.SentDate,
+            e.package.SentFrom, e.package.Destination, e.package.Status,
+            e.package.Price, e.package.DaysToArrive
+        );
+
         if (package.Status == "Kiszállítva")
         {
             package.DaysToArrive = 0;
@@ -88,10 +95,16 @@ public partial class MainViewModel : ViewModelBase
             GoBack?.Invoke(this, EventArgs.Empty);
         });
 
+        package.DeleteCommand = new RelayCommand(() =>
+        {
+            Packages.Remove(package);
+        });
+
         Packages.Add(package);
     }
 
-    private  void AddPackage()
+
+    private void AddPackage()
     {
         Package package = new Package(IdInput, NameInput, Sent, SentFromInput, DestinationInput, StatusInput, PriceInput, DaysToArriveInput);
         if (package.Status == "Kiszállítva")
@@ -110,6 +123,11 @@ public partial class MainViewModel : ViewModelBase
         package.BackCommand = new RelayCommand(() =>
         {
             GoBack?.Invoke(this, EventArgs.Empty);
+        });
+
+        package.DeleteCommand = new RelayCommand(() =>
+        {
+            _model.DeletePackage(package);
         });
 
         _model.AddPackage(package);

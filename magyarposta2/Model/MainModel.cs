@@ -10,6 +10,7 @@ namespace magyarposta2.Model
     public class MainModel
     {
         private List<Package> packages { get; set; }
+        private List<Package> removedPackages { get; set; }
         public IDataAccess DataAccess;
         public event EventHandler<PackageEventArgs>? PackageAdded;
 
@@ -17,6 +18,20 @@ namespace magyarposta2.Model
         {
             DataAccess = dataAccess;
             packages = new List<Package>();
+        }
+
+        public void RemovePackage(Package package)
+        {
+            Package removedPackage = null;
+            foreach (Package p in packages)
+            {
+                if (p.Id == package.Id)
+                {
+                    removedPackage = p;
+                }
+            }
+            packages.Remove(removedPackage);
+            removedPackages.Add(package);
         }
 
         public void AddPackage(Package package)
@@ -27,6 +42,7 @@ namespace magyarposta2.Model
 
         public async Task Load(string path)
         {
+            packages.Clear();
             List<Package> newPackages = await DataAccess.LoadAll(path);
             foreach (Package p in newPackages)
             {
@@ -37,9 +53,14 @@ namespace magyarposta2.Model
 
         //public Package package;
 
+        public void DeletePackage(Package package)
+        {
+            packages.Remove(package);
+        }
+
         public async Task Save(string path)
         {
-            DataAccess.Save(path, packages);
+            await DataAccess.Save(path, packages);
         }
 
     }

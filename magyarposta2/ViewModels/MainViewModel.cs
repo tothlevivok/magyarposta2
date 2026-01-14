@@ -68,7 +68,6 @@ public partial class MainViewModel : ViewModelBase
         SaveCommand = new RelayCommand(() => { SaveEvent.Invoke(this, EventArgs.Empty); });
     }
 
-
     private void OnAddPackage(object? sender, PackageEventArgs e)
     {
         Package package = e.package;

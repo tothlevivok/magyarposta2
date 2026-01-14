@@ -69,6 +69,10 @@ public partial class App : Application
                     await model.Load(file[0].Path.AbsolutePath);
                 }
             };
+            viewModel.GoBack += (s, e) =>
+            {
+                desktop.MainWindow.Content = view;
+            };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {

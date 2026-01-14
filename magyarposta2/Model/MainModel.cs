@@ -48,6 +48,5 @@ namespace magyarposta2.Model
         {
             await DataAccess.Save(path, packages);
         }
-
     }
 }

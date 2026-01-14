@@ -3,83 +3,103 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:magyarposta2.ViewModels"
-			 xmlns:asd="clr-namespace:magyarposta2"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:asd="clr-namespace:magyarposta2"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
              x:Class="magyarposta2.Views.MainView"
              x:DataType="vm:MainViewModel">
-  <Grid>
-	  <Grid.RowDefinitions>
-		  <RowDefinition/>
-		  <RowDefinition/>
-		  <RowDefinition/>
-		  <RowDefinition/>
-		  <RowDefinition/>
-		  <RowDefinition/>
-		  <RowDefinition/>
-		  <RowDefinition/>
-		  <RowDefinition/>
-		  <RowDefinition/>
-		  <RowDefinition/>
-		  <RowDefinition/>
-      </Grid.RowDefinitions>
-      <Grid.ColumnDefinitions>
-		  <ColumnDefinition Width="0.75*"/>
-		  <ColumnDefinition Width="0.75*"/>
-		  <ColumnDefinition Width="1.75*"/>
-		  <ColumnDefinition/>
-      </Grid.ColumnDefinitions>
 
-	  <Label Grid.Column="0" Grid.Row="0" Content="Magyar Posta"/>
-	  <Label Grid.Column="0" Grid.Row="1" Content="Csomag ID:"/>
-	  <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding IdInput}"/>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
 
-	  <Label Grid.Column="0" Grid.Row="2" Content="Csomag Neve:"/>
-	  <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding NameInput}"/>
+        <!-- BAL OLDAL -->
+        <Grid Grid.Column="0" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>      <!-- FORM -->
+                <RowDefinition Height="Auto"/>  <!-- GOMBOK -->
+            </Grid.RowDefinitions>
 
-	   <Label Grid.Column="2" Grid.Row="1" Content="Feladás ideje:"/>
-	  <StackPanel Grid.Column="2" Grid.Row="1" Margin="20">
-		<Calendar x:Name="calendar" SelectionMode="MultipleRange" SelectedDate="{Binding SentDate}"/>
-		<TextBlock Margin="20" Text="{Binding Sent}"/>
-	  </StackPanel>
+            <!-- FORM (görgethetõ) -->
+            <ScrollViewer Grid.Row="0">
+                <StackPanel>
 
-	  <Label Grid.Column="0" Grid.Row="3" Content="Honnan:"/>
-	  <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding SentFromInput}"/>
+                    <Label Content="Magyar Posta"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Margin="0,0,0,20"/>
 
-	  <Label Grid.Column="0" Grid.Row="4" Content="Hova:"/>
-	  <TextBox Grid.Column="1" Grid.Row="4" Text="{Binding DestinationInput}"/>
+                    <Label Content="Csomag ID:"/>
+                    <TextBox Text="{Binding IdInput}" Margin="0,0,0,10"/>
 
-	  <Label Grid.Column="0" Grid.Row="5" Content="Csomag állapota:"/>
-	  <StackPanel Margin="20">
-		  <ComboBox SelectedValue="{Binding StatusInput}" MaxDropDownHeight="100">
-			<x:String >Feldolgozás alatt</x:String>
-			<x:String>Kiszállítás alatt</x:String>
-			<x:String>Kiszállítva</x:String>
-			<x:String>Kiszálltva</x:String>
-			<x:String>Törölve</x:String>
-		  </ComboBox>
-	</StackPanel>
+                    <Label Content="Csomag Neve:"/>
+                    <TextBox Text="{Binding NameInput}" Margin="0,0,0,10"/>
 
-	  
-	  <Label Grid.Column="0" Grid.Row="6" Content="Csomag ára:"/>
-	  <TextBox Grid.Column="1" Grid.Row="6" Text="{Binding PriceInput}"/>
+                    <Label Content="Feladás ideje:"/>
+                    <Calendar SelectionMode="SingleDate"
+                              SelectedDate="{Binding SentDate}"
+                              Height="220"
+                              Margin="0,0,0,5"/>
 
-	  <Label Grid.Column="0" Grid.Row="7" Content="Csomag érkezési ideje:"/>
-	  <TextBox Grid.Column="1" Grid.Row="7" Text="{Binding DaysToArriveInput}"/>
+                    <TextBlock Text="{Binding Sent}" Margin="0,0,0,10"/>
 
-	  <Button Grid.Row="9" Grid.ColumnSpan="2" Command="{Binding AddPackageCommand}" Content="Hozzáadás" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-	  <Button Grid.Row="10" Grid.ColumnSpan="2" Command="{Binding SaveCommand}" Content="Mentés" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-	  <Button Grid.Row="11" Grid.ColumnSpan="2" Command="{Binding LoadCommand}" Content="Betöltés" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Label Content="Honnan:"/>
+                    <TextBox Text="{Binding SentFromInput}" Margin="0,0,0,10"/>
 
-	  <ScrollViewer Grid.Row="0" Grid.Column="2" Grid.RowSpan="4">
-		  <StackPanel>
-			  <ItemsControl ItemsSource="{Binding Packages}">
-				  <ItemsControl.ItemTemplate>
-					  <DataTemplate>
-						  <asd:UserControl1/>
-                      </DataTemplate>
-                  </ItemsControl.ItemTemplate>
-              </ItemsControl>
-          </StackPanel>
-      </ScrollViewer>
-  </Grid>
+                    <Label Content="Hova:"/>
+                    <TextBox Text="{Binding DestinationInput}" Margin="0,0,0,10"/>
+
+                    <Label Content="Csomag állapota:"/>
+                    <ComboBox SelectedValue="{Binding StatusInput}"
+                              Margin="0,0,0,10">
+                        <x:String>Feldolgozás alatt</x:String>
+                        <x:String>Kiszállítás alatt</x:String>
+                        <x:String>Kiszállítva</x:String>
+                        <x:String>Törölve</x:String>
+                    </ComboBox>
+
+                    <Label Content="Csomag ára:"/>
+                    <TextBox Text="{Binding PriceInput}" Margin="0,0,0,10"/>
+
+                    <Label Content="Csomag érkezési ideje (nap):"/>
+                    <TextBox Text="{Binding DaysToArriveInput}"
+                             Margin="0,0,0,20"/>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- GOMBOK (fix alul) -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,*,*"
+                  Margin="0,10,0,0">
+
+                <Button Grid.Column="0"
+                        Command="{Binding AddPackageCommand}"
+                        Content="Hozzáadás"/>
+
+                <Button Grid.Column="1"
+                        Command="{Binding SaveCommand}"
+                        Content="Mentés"/>
+
+                <Button Grid.Column="2"
+                        Command="{Binding LoadCommand}"
+                        Content="Betöltés"/>
+
+            </Grid>
+        </Grid>
+
+        <!-- JOBB OLDAL -->
+        <ScrollViewer Grid.Column="1" Margin="10">
+            <ItemsControl ItemsSource="{Binding Packages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <asd:UserControl1/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+    </Grid>
 </UserControl>

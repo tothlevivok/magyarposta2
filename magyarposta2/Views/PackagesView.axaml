@@ -52,9 +52,6 @@
 
 		<Label Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Content="Days To Arrive: "/>
 		<TextBox Grid.Row="7" Grid.Column="1"  Text="{Binding DaysToArrive}"/>
-
-		<Button Content="Módosítás"
-            Command="{Binding UpdateCommand}" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center"/>
 	<Button Grid.Column="2" HorizontalAlignment="Right" Grid.Row="8" Content="Vissza" Command="{Binding BackCommand}"/>
     </Grid>
 </UserControl>

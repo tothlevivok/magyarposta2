@@ -71,11 +71,7 @@ public partial class MainViewModel : ViewModelBase
 
     private void OnAddPackage(object? sender, PackageEventArgs e)
     {
-        Package package = new Package(
-            e.package.Id, e.package.Name, e.package.SentDate,
-            e.package.SentFrom, e.package.Destination, e.package.Status,
-            e.package.Price, e.package.DaysToArrive
-        );
+        Package package = e.package;
 
         if (package.Status == "Kiszállítva")
         {
@@ -97,6 +93,7 @@ public partial class MainViewModel : ViewModelBase
 
         package.DeleteCommand = new RelayCommand(() =>
         {
+            _model.DeletePackage(package);
             Packages.Remove(package);
         });
 
@@ -128,6 +125,7 @@ public partial class MainViewModel : ViewModelBase
         package.DeleteCommand = new RelayCommand(() =>
         {
             _model.DeletePackage(package);
+            Packages.Remove(package);
         });
 
         _model.AddPackage(package);

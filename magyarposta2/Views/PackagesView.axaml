@@ -39,11 +39,10 @@
 		<Label Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Content="Status: "/>
 		<StackPanel Grid.Row="5" Grid.Column="1" Margin="20">
 		  <ComboBox SelectedValue="{Binding Status}" MaxDropDownHeight="100">
-			<x:String >Feldolgozás alatt</x:String>
-			<x:String>Kiszállítás alatt</x:String>
-			<x:String>Kiszállítva</x:String>
-			<x:String>Kiszálltva</x:String>
-			<x:String>Törölve</x:String>s
+			<x:String >Feldolgozas alatt</x:String>
+			<x:String>Kiszallitas alatt</x:String>
+			<x:String>Kiszallitva</x:String>
+			<x:String>Torolve</x:String>
 		  </ComboBox>
 	</StackPanel>
 

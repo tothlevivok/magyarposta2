@@ -48,5 +48,25 @@ namespace magyarposta2.Model
         {
             await DataAccess.Save(path, packages);
         }
+
+        public async Task SaveOnDeleted(string path)
+        {
+            await DataAccess.SaveOnDeleted(path, packages);
+        }
+
+        public async Task SaveOnlyOnArrived(string path)
+        {
+            await DataAccess.SaveOnlyOnArrived(path, packages);
+        }
+
+        public async Task SaveOnlyOnProcessing(string path)
+        {
+            await DataAccess.SaveOnlyOnProcessing(path, packages);
+        }
+
+        public async Task SaveOnlyOnArrive(string path)
+        {
+            await DataAccess.SaveOnlyOnArrive(path, packages);
+        }
     }
 }

@@ -7,6 +7,8 @@ using magyarposta2.Model;
 using magyarposta2.Persistance;
 using magyarposta2.ViewModels;
 using magyarposta2.Views;
+using System;
+using System.Threading.Tasks;
 
 namespace magyarposta2;
 
@@ -54,6 +56,62 @@ public partial class App : Application
                 if (file is not null)
                 {
                     await model.Save(file.Path.AbsolutePath);
+                }
+            };
+            viewModel.SaveOnlyArrived += async (s, e) =>
+            {
+                TopLevel topLevel = TopLevel.GetTopLevel(view);
+                var file = await topLevel.StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions
+                {
+                    Title = "Save Packages",
+                    SuggestedFileName = "packages.txt",
+                    DefaultExtension = "txt"
+                });
+                if (file is not null)
+                {
+                    await model.SaveOnlyOnArrived(file.Path.AbsolutePath);
+                }
+            };
+            viewModel.SaveOnlyArrive += async (s, e) =>
+            {
+                TopLevel topLevel = TopLevel.GetTopLevel(view);
+                var file = await topLevel.StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions
+                {
+                    Title = "Save Packages",
+                    SuggestedFileName = "packages.txt",
+                    DefaultExtension = "txt"
+                });
+                if (file is not null)
+                {
+                    await model.SaveOnlyOnArrive(file.Path.AbsolutePath);
+                }
+            };
+            viewModel.SaveOnlyProcessing += async (s, e) =>
+            {
+                TopLevel topLevel = TopLevel.GetTopLevel(view);
+                var file = await topLevel.StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions
+                {
+                    Title = "Save Packages",
+                    SuggestedFileName = "packages.txt",
+                    DefaultExtension = "txt"
+                });
+                if (file is not null)
+                {
+                    await model.SaveOnlyOnProcessing(file.Path.AbsolutePath);
+                }
+            };
+            viewModel.SaveOnlyDeleted += async (s, e) =>
+            {
+                TopLevel topLevel = TopLevel.GetTopLevel(view);
+                var file = await topLevel.StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions
+                {
+                    Title = "Save Packages",
+                    SuggestedFileName = "packages.txt",
+                    DefaultExtension = "txt"
+                });
+                if (file is not null)
+                {
+                    await model.SaveOnDeleted(file.Path.AbsolutePath);
                 }
             };
             viewModel.LoadEvent += async (s, e) =>

@@ -10,6 +10,10 @@ namespace magyarposta2.Persistance
     public interface IDataAccess
     {
         Task Save(string path, List<Package> package);
+        Task SaveOnDeleted(string path, List<Package> package);
+        Task SaveOnlyOnArrived(string path, List<Package> package);
+        Task SaveOnlyOnProcessing(string path, List<Package> package);
+        Task SaveOnlyOnArrive(string path, List<Package> package);
         Task<List<Package>> LoadAll(string path);
     }
 }

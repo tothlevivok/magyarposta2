@@ -61,5 +61,92 @@ namespace magyarposta2.Persistance
                 }
             }
         }
+
+        public async Task SaveOnDeleted(string path, List<Package> packages)
+        {
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                try
+                {
+                    foreach (Package package in packages)
+                    {
+                        if (package.Status == "Torolve")
+                        {
+                            
+                            string line = package.ToString();
+                            await writer.WriteLineAsync(line);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+        public async Task SaveOnlyOnArrived(string path, List<Package> packages)
+        {
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                try
+                {
+                    foreach (Package package in packages)
+                    {
+                        if (package.Status == "Kiszallitva")
+                        {
+                            string line = package.ToString();
+                            await writer.WriteLineAsync(line);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+        public async Task SaveOnlyOnProcessing(string path, List<Package> packages)
+        {
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                try
+                {
+                    foreach (Package package in packages)
+                    {
+                        if (package.Status == "Feldolgozas alatt")
+                        {
+                            string line = package.ToString();
+                            await writer.WriteLineAsync(line);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+
+        public async Task SaveOnlyOnArrive(string path, List<Package> packages)
+        {
+            using (StreamWriter writer = new StreamWriter(path))
+            {
+                try
+                {
+                    foreach (Package package in packages)
+                    {
+                        if (package.Status == "Kiszallitas alatt")
+                        {
+                            string line = package.ToString();
+                            await writer.WriteLineAsync(line);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
     }
 }

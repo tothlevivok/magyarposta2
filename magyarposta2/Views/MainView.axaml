@@ -16,14 +16,12 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- BAL OLDAL -->
         <Grid Grid.Column="0" Margin="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>      <!-- FORM -->
-                <RowDefinition Height="Auto"/>  <!-- GOMBOK -->
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- FORM (görgethetõ) -->
             <ScrollViewer Grid.Row="0">
                 <StackPanel>
 
@@ -53,12 +51,12 @@
                     <TextBox Text="{Binding DestinationInput}" Margin="0,0,0,10"/>
 
                     <Label Content="Csomag állapota:"/>
-                    <ComboBox SelectedValue="{Binding StatusInput}"
+                    <ComboBox SelectedItem="{Binding StatusInput}"
                               Margin="0,0,0,10">
-                        <x:String>Feldolgozás alatt</x:String>
-                        <x:String>Kiszállítás alatt</x:String>
-                        <x:String>Kiszállítva</x:String>
-                        <x:String>Törölve</x:String>
+                        <x:String>Feldolgozas alatt</x:String>
+                        <x:String>Kiszallitas alatt</x:String>
+                        <x:String>Kiszallitva</x:String>
+                        <x:String>Torolve</x:String>
                     </ComboBox>
 
                     <Label Content="Csomag ára:"/>
@@ -71,7 +69,6 @@
                 </StackPanel>
             </ScrollViewer>
 
-            <!-- GOMBOK (fix alul) -->
             <Grid Grid.Row="1" ColumnDefinitions="*,*,*"
                   Margin="0,10,0,0">
 
@@ -79,18 +76,9 @@
                         Command="{Binding AddPackageCommand}"
                         Content="Hozzáadás"/>
 
-                <Button Grid.Column="1"
-                        Command="{Binding SaveCommand}"
-                        Content="Mentés"/>
-
-                <Button Grid.Column="2"
-                        Command="{Binding LoadCommand}"
-                        Content="Betöltés"/>
-
             </Grid>
         </Grid>
 
-        <!-- JOBB OLDAL -->
         <ScrollViewer Grid.Column="1" Margin="10">
             <ItemsControl ItemsSource="{Binding Packages}">
                 <ItemsControl.ItemTemplate>
@@ -101,5 +89,23 @@
             </ItemsControl>
         </ScrollViewer>
 
+        <DockPanel>
+    <Menu DockPanel.Dock="Top">
+      <MenuItem Header="Mentés">
+        <MenuItem Header="Mentés mind" Command="{Binding SaveCommand}"/>
+        <Separator/>
+        <MenuItem Header="Mentés (Feldolgozás alatt)" Command="{Binding SaveOnlyOnProcessing}"/>
+          <Separator/>
+        <MenuItem Header="Mentés (Kiszállítás alatt)" Command="{Binding SaveOnlyOnArrive}"/>
+          <Separator/>
+        <MenuItem Header="Mentés (Kiszállítva)" Command="{Binding SaveOnlyOnArrived}"/>
+          <Separator/>
+        <MenuItem Header="Mentés (Törölve)" Command="{Binding SaveOnDeleted}"/>
+      </MenuItem>
+    <MenuItem Header="Betöltés" Command="{Binding LoadCommand}"></MenuItem>
+    </Menu>
+    <TextBlock/>
+  </DockPanel>
+    
     </Grid>
 </UserControl>

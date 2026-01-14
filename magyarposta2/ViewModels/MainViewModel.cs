@@ -50,6 +50,10 @@ public partial class MainViewModel : ViewModelBase
     public RelayCommand AddPackageCommand { get; set; }
     public RelayCommand LoadCommand { get; set; }
     public RelayCommand SaveCommand { get; set; }
+    public RelayCommand SaveOnDeleted { get; set; }
+    public RelayCommand SaveOnlyOnArrived { get; set; }
+    public RelayCommand SaveOnlyOnProcessing{ get; set; }
+    public RelayCommand SaveOnlyOnArrive { get; set; }
     public ObservableCollection<Package> Packages { get; set; }
 
     public event EventHandler<PackageEventArgs> ChangeView;
@@ -57,6 +61,10 @@ public partial class MainViewModel : ViewModelBase
 
     public event EventHandler LoadEvent;
     public event EventHandler SaveEvent;
+    public event EventHandler SaveOnlyArrived;
+    public event EventHandler SaveOnlyArrive;
+    public event EventHandler SaveOnlyProcessing;
+    public event EventHandler SaveOnlyDeleted;
 
     public MainViewModel(MainModel model)
     {
@@ -64,8 +72,12 @@ public partial class MainViewModel : ViewModelBase
         Packages = new ObservableCollection<Package>();
         _model.PackageAdded += OnAddPackage;
         AddPackageCommand = new RelayCommand(AddPackage);
-        LoadCommand = new RelayCommand(() => LoadEvent.Invoke(this, EventArgs.Empty));
-        SaveCommand = new RelayCommand(() => { SaveEvent.Invoke(this, EventArgs.Empty); });
+        LoadCommand = new RelayCommand(() => LoadEvent?.Invoke(this, EventArgs.Empty));
+        SaveCommand = new RelayCommand(() => { SaveEvent?.Invoke(this, EventArgs.Empty); });
+        SaveOnDeleted = new RelayCommand(() => { SaveOnlyDeleted?.Invoke(this, EventArgs.Empty); });
+        SaveOnlyOnArrived = new RelayCommand(() => { SaveOnlyArrived?.Invoke(this, EventArgs.Empty); });
+        SaveOnlyOnProcessing = new RelayCommand(() => { SaveOnlyProcessing?.Invoke(this, EventArgs.Empty); });
+        SaveOnlyOnArrive = new RelayCommand(() => { SaveOnlyArrive?.Invoke(this, EventArgs.Empty); });
     }
 
     private void OnAddPackage(object? sender, PackageEventArgs e)

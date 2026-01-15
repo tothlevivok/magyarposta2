@@ -139,7 +139,7 @@ public partial class App : Application
                 DataContext = viewModel
             };
 
-            var mainContent = phoneView.MainGrid; // Tegyük fel, hogy a PhoneView-ban van x:Name="MainGrid"
+            var mainContent = phoneView.MainGrid;
             singleViewPlatform.MainView = phoneView;
 
             viewModel.ChangeView += (s, e) =>
@@ -152,7 +152,7 @@ public partial class App : Application
 
             viewModel.GoBack += (s, e) =>
             {
-                phoneView.Content = mainContent; // vissza az eredeti PhoneView layouthoz
+                phoneView.Content = mainContent;
             };
 
             viewModel.SaveEvent += async (s, e) =>

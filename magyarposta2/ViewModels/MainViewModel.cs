@@ -93,6 +93,11 @@ public partial class MainViewModel : ViewModelBase
             return;
         }
 
+        if (package.Status == "Torolve")
+        {
+            package.DaysToArrive = 0;
+        }
+
         package.MoreCommand = new RelayCommand(() =>
         {
             ChangeView?.Invoke(this, new PackageEventArgs(package));
@@ -122,6 +127,11 @@ public partial class MainViewModel : ViewModelBase
         if (package.Price <= 0)
         {
             return;
+        }
+
+        if (package.Status == "Torolve")
+        {
+            package.DaysToArrive = 0;
         }
 
         package.MoreCommand = new RelayCommand(() =>

@@ -134,11 +134,105 @@ public partial class App : Application
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = new MainView
+            var phoneView = new PhoneView
             {
                 DataContext = viewModel
             };
+
+            var mainContent = phoneView.MainGrid; // Tegyük fel, hogy a PhoneView-ban van x:Name="MainGrid"
+            singleViewPlatform.MainView = phoneView;
+
+            viewModel.ChangeView += (s, e) =>
+            {
+                phoneView.Content = new PackagesView
+                {
+                    DataContext = e.package
+                };
+            };
+
+            viewModel.GoBack += (s, e) =>
+            {
+                phoneView.Content = mainContent; // vissza az eredeti PhoneView layouthoz
+            };
+
+            viewModel.SaveEvent += async (s, e) =>
+            {
+                var topLevel = TopLevel.GetTopLevel(phoneView);
+                var file = await topLevel.StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions
+                {
+                    Title = "Save Packages",
+                    SuggestedFileName = "packages.txt",
+                    DefaultExtension = "txt"
+                });
+                if (file != null)
+                    await model.Save(file.Path.AbsolutePath);
+            };
+
+            viewModel.SaveOnlyArrived += async (s, e) =>
+            {
+                var topLevel = TopLevel.GetTopLevel(phoneView);
+                var file = await topLevel.StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions
+                {
+                    Title = "Save Packages",
+                    SuggestedFileName = "packages.txt",
+                    DefaultExtension = "txt"
+                });
+                if (file != null)
+                    await model.SaveOnlyOnArrived(file.Path.AbsolutePath);
+            };
+
+            viewModel.SaveOnlyArrive += async (s, e) =>
+            {
+                var topLevel = TopLevel.GetTopLevel(phoneView);
+                var file = await topLevel.StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions
+                {
+                    Title = "Save Packages",
+                    SuggestedFileName = "packages.txt",
+                    DefaultExtension = "txt"
+                });
+                if (file != null)
+                    await model.SaveOnlyOnArrive(file.Path.AbsolutePath);
+            };
+
+            viewModel.SaveOnlyProcessing += async (s, e) =>
+            {
+                var topLevel = TopLevel.GetTopLevel(phoneView);
+                var file = await topLevel.StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions
+                {
+                    Title = "Save Packages",
+                    SuggestedFileName = "packages.txt",
+                    DefaultExtension = "txt"
+                });
+                if (file != null)
+                    await model.SaveOnlyOnProcessing(file.Path.AbsolutePath);
+            };
+
+            viewModel.SaveOnlyDeleted += async (s, e) =>
+            {
+                var topLevel = TopLevel.GetTopLevel(phoneView);
+                var file = await topLevel.StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions
+                {
+                    Title = "Save Packages",
+                    SuggestedFileName = "packages.txt",
+                    DefaultExtension = "txt"
+                });
+                if (file != null)
+                    await model.SaveOnDeleted(file.Path.AbsolutePath);
+            };
+
+            viewModel.LoadEvent += async (s, e) =>
+            {
+                var topLevel = TopLevel.GetTopLevel(phoneView);
+                var file = await topLevel.StorageProvider.OpenFilePickerAsync(new Avalonia.Platform.Storage.FilePickerOpenOptions
+                {
+                    Title = "Load Packages",
+                    AllowMultiple = false
+                });
+                if (file != null)
+                    await model.Load(file[0].Path.AbsolutePath);
+            };
         }
+
 
         base.OnFrameworkInitializationCompleted();
     }
